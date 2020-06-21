@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -jar target/bike-rental-app-0.1.jar db migrate prod.yml && java $JAVA_OPTS -Ddw.server.connector.port=$PORT -jar target/bike-rental-app-0.1.jar server prod.yml

@@ -1,0 +1,35 @@
+database:
+    driverClass: org.postgresql.Driver
+    url: ${JDBC_DATABASE_URL}
+    user: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+    properties:
+      charSet: UTF-8
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate.hbm2ddl.auto: create
+      hibernate.naming.implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+      hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+server:
+    type: simple
+    applicationContextPath: /
+    connector:
+        type: http
+        port: 8080
+
+logging:
+    level: INFO    
+    appenders:
+        - type: console
+        - type: file
+          currentLogFilename: './logs/application.log'
+          archivedLogFilenamePattern: './logs/application-%d-%i.log.gz'
+          archive: true
+          archivedFileCount: 7
+          maxFileSize: '1MiB'
+
+smtpServerDetails:
+    host: 'smtp.gmail.com'
+    port: 25
+    username: 'csl456bikerentalapp@gmail.com'
+    password: 'igrcfuvlvvncbtfh'
