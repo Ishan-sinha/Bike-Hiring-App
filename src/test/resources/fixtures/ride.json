@@ -1,0 +1,9 @@
+{
+  "startLocationId": 1,
+  "endLocationId": 2,
+  "startTime": 0,
+  "endTime": 0,
+  "cycleId": 1,
+  "personId": 1,
+  "cost": 10.0
+}

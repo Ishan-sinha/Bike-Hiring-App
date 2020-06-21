@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="aditya">
+        <createTable tableName="person">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contactNumber" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="locations">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="latitude" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="longitude" type="double">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="cycle">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="brand" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ownerId" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_owner_id" references="person(id)"/>
+            </column>
+            <column name="status" type="int"/>
+            <column name="locationId" type="int">
+                <constraints nullable="false" foreignKeyName="fk_cycle_location" references="locations(id)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="users">
+            <column name="username" type="varchar(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="personId" type="int">
+                <constraints nullable="false" foreignKeyName="fk_user_person" references="person(id)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="session">
+            <column name="accessToken" type="varchar(23)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="varchar(100)">
+                <constraints nullable="false" foreignKeyName="fk_session_user" references="users(username)"/>
+            </column>
+            <column name="created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="ride">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="startLocationId" type="int">
+                <constraints nullable="false" foreignKeyName="fk_ride_start_location" references="locations(id)"/>
+            </column>
+            <column name="endLocationId" type="int">
+                <constraints foreignKeyName="fk_ride_end_location" references="locations(id)"/>
+            </column>
+            <column name="startTime" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="endTime" type="datetime"/>
+            <column name="cost" type="double"/>
+            <column name="cycleId" type="int">
+                <constraints nullable="false" foreignKeyName="fk_ride_cycle" references="cycle(id)"/>
+            </column>
+            <column name="personId" type="int">
+                <constraints nullable="false" foreignKeyName="fk_ride_person" references="person(id)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="complaint">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="startTime" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="endTime" type="datetime"/>
+            <column name="details" type="text"/>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cycleId" type="int">
+                <constraints nullable="false" foreignKeyName="fk_complaint_cycle" references="cycle(id)"/>
+            </column>
+            <column name="personId" type="int">
+                <constraints nullable="false" foreignKeyName="fk_complaint_person" references="person(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
