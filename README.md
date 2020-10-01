@@ -5,7 +5,9 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/adityagupta1089/Bike-Rental-App/badge.svg)](https://snyk.io/test/github/adityagupta1089/Bike-Rental-App) 
 
 ## 1. Introduction 
-This is the server component of an application that is used for renting or leasing cycles.
+This is the server component of an application that is used for renting or leasing cycles. 
+## Changes
+New Changes include better optimization of server, easy and faster navigation, faster loadability of the server and parallel operation and execution.
 
 ## 2. Requirements
 - [Maven](https://maven.apache.org/)
